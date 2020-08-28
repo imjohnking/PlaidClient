@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>0.0.0.1</Version>
+    <Authors>John King</Authors>
+    <Company>Take5ive Development and Consulting</Company>
+    <Product>Plaid API Client</Product>
+    <RootNamespace>Take5ive.Plaid</RootNamespace>
+    <AssemblyName>Take5ive.Plaid</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\Users\john\source\repos\Take5ive.PlaidClient\Take5ive.Plaid.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="docfx.console" Version="2.56.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Roslynator.Analyzers" Version="2.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Take5ive.Json.Converters.Newtonizer" Version="1.0.1" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Take5ive.Plaid</name>
+    </assembly>
+    <members>
+        <member name="T:Take5ive.Plaid.Accounts.Account">
+            <summary>
+            Linked Bank Account
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Account.AccountID">
+            <summary>
+            Gets or sets the Account ID
+            </summary>
+            <value>The unique ID of the account</value>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Account.Balances">
+            <summary>
+            Gets or sets the account balances object
+            </summary>
+            <value>Account balance details</value>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Account.Mask">
+            <summary>
+            Gets or sets the account mask
+            </summary>
+            <value>The last 2-4 alphanumeric characters of an account's official account number</value>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Account.Name">
+            <summary>
+            Gets or sets the account name
+            </summary>
+            <value>The name of the Account, either assigned by the user or the financial institution itself</value>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Account.OfficialName">
+            <summary>
+            Gets or sets the official account name
+            </summary>
+            <value>The official name of the Account as given by the financial institution</value>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Account.Owners">
+            <summary>
+            Gets or sets the account owner object
+            </summary>
+            <value>Account owner details</value>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Account.Subtype">
+            <summary>
+            Gets or sets the account subtype
+            </summary>
+            <value>Account subtype</value>
+            <remarks>https://plaid.com/docs/#account-subtypes</remarks>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Account.Type">
+            <summary>
+            Gets or sets the account type
+            </summary>
+            <value>Account type</value>
+            <remarks>https://plaid.com/docs/#account-types</remarks>
+        </member>
+        <member name="T:Take5ive.Plaid.Accounts.AccountsClient">
+            <summary>
+            Handles all of the Auth related requests to the Plaid API.
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.Accounts.AccountsClient.#ctor(System.Net.Http.HttpClient,Take5ive.Plaid.PlaidConfig)">
+            <summary>
+            Constructor for the AccountsClient
+            </summary>
+            <param name="httpClient">HttpClient to use for all requests</param>
+            <param name="plaidConfig">Plaid configuration values specific to caller</param>
+        </member>
+        <member name="M:Take5ive.Plaid.Accounts.AccountsClient.GetAccounts(System.String)">
+            <summary>
+            Retrieve information for any linked bank account
+            </summary>
+            <param name="accessToken">Plaid access token for this item</param>
+            <returns>All accounts for the specified access token</returns>
+            <remarks>
+            https://plaid.com/docs/#accounts
+            </remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Accounts.AccountsClient.GetBalance(Take5ive.Plaid.Accounts.GetBalanceRequest)">
+            <summary>
+            Returns the real-time balance for each of an Item's accounts
+            </summary>
+            <param name="request">Plaid request parameters</param>
+            <returns>Balance Details for one or more requested accounts</returns>
+            <remarks>https://plaid.com/docs/#balance</remarks>
+        </member>
+        <member name="T:Take5ive.Plaid.Accounts.ACHInfo">
+            <summary>
+            Account ACH Information
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.ACHInfo.Account">
+            <summary>
+            The ACH account number for the account
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.ACHInfo.AccountID">
+            <summary>
+            The Plaid account ID associated with the account numbers
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.ACHInfo.Routing">
+            <summary>
+            The ACH routing number for the account
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.ACHInfo.WireRouting">
+            <summary>
+            The ACH wire routing number for the account, if available
+            </summary>
+        </member>
+        <member name="T:Take5ive.Plaid.Accounts.Balances">
+            <summary>
+            Account balance information
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Balances.Available">
+            <summary>
+            The amount of funds available to be withdrawn from the account, as determined by the financial institution
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Balances.Current">
+            <summary>
+            The total amount of funds in or owed by the account
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Balances.ISOCurrencyCode">
+            <summary>
+            The ISO currency code of the balance
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Balances.Limit">
+            <summary>
+            For credit-type accounts, this represents the credit limit
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.Balances.UnofficialCurrencyCode">
+            <summary>
+            The unofficial currency code associated with the balance
+            </summary>
+        </member>
+        <member name="T:Take5ive.Plaid.Accounts.GetAccountsResponse">
+            <summary>
+            Accounts held at an institution
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.GetAccountsResponse.Accounts">
+            <summary>
+            Accounts and account details
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.GetAccountsResponse.Item">
+            <summary>
+            Details regarding the Plaid "item"
+            </summary>
+            <remarks>
+            An item is a set of credentials at a financial institution; each Item 
+            can have many Accounts, and some Accounts have Transactions associated with them
+            </remarks>
+        </member>
+        <member name="T:Take5ive.Plaid.Accounts.GetBalanceRequest">
+            <summary>
+            Used in retrieving real-time balances for an account
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.Accounts.GetBalanceRequest.#ctor">
+            <summary>
+            Request constructor
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.GetBalanceRequest.Options">
+            <summary>
+            Optional request data
+            </summary>
+        </member>
+        <member name="T:Take5ive.Plaid.Accounts.GetBalanceRequest.RequestOptions">
+            <summary>
+            Optional request data
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.GetBalanceRequest.RequestOptions.AccountIDs">
+            <summary>
+            A list of account_ids to retrieve for the Item
+            </summary>
+        </member>
+        <member name="T:Take5ive.Plaid.Accounts.GetBalanceResponse">
+            <summary>
+            Contains response data for a GetBalanceRequest
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.GetBalanceResponse.Accounts">
+            <summary>
+            Accounts retreived
+            </summary>
+        </member>
+        <member name="P:Take5ive.Plaid.Accounts.GetBalanceResponse.Item">
+            <summary>
+            Plaid Item Details
+            </summary>
+        </member>
+        <member name="T:Take5ive.Plaid.Accounts.IAccountsClient">
+            <summary>
+            Handles all of the Auth related requests to the Plaid API.
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.Accounts.IAccountsClient.GetAccounts(System.String)">
+            <summary>
+            Retrieve information for any linked bank account
+            </summary>
+            <param name="accessToken">Plaid access token for this item</param>
+            <returns>All accounts for the specified access token</returns>
+            <remarks>
+            https://plaid.com/docs/#accounts
+            </remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Accounts.IAccountsClient.GetBalance(Take5ive.Plaid.Accounts.GetBalanceRequest)">
+            <summary>
+            Returns the real-time balance for each of an Item's accounts
+            </summary>
+            <param name="request">Plaid request parameters</param>
+            <returns>Balance Details for one or more requested accounts</returns>
+            <remarks>https://plaid.com/docs/#balance</remarks>
+        </member>
+        <member name="T:Take5ive.Plaid.AssetReport.AssetReportClient">
+            <summary>
+            Handles all of the Asset Report related requests to the Plaid API.
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.AssetReport.AssetReportClient.CreateAuditCopy(Take5ive.Plaid.AssetReport.CreateAuditCopyRequest)">
+            <summary>
+            Create a token to provide an Audit Copy of any Asset Report directly to a participating third party on your behalf.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Audit copy token</returns>
+            <remarks>https://plaid.com/docs/#4-share-an-audit-copy</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.AssetReport.AssetReportClient.CreateReport(Take5ive.Plaid.AssetReport.CreateReportRequest)">
+            <summary>
+            Retrieve point-in-time snapshots of an Item or set of Items, including account balances,
+            historical transactions, and account holder identity information.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Asset report tokens.</returns>
+            <remarks>https://plaid.com/docs/#2-create-an-asset-report</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.AssetReport.AssetReportClient.FilterReport(Take5ive.Plaid.AssetReport.FilterReportRequest)">
+            <summary>
+            Narrow an Asset Report to only a subset of Accounts.
+            </summary>
+            <param name="request">Request object identifying report and accounts to filter.</param>
+            <returns>Asset report tokens.</returns>
+            <remarks>https://plaid.com/docs/#specifying-which-accounts-appear-in-the-asset-report</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.AssetReport.AssetReportClient.GetReport(Take5ive.Plaid.AssetReport.GetReportRequest)">
+            <summary>
+            Retrieve Asset Report
+            </summary>
+            <param name="request"></param>
+            <returns>Asset report</returns>
+            <remarks>https://plaid.com/docs/#3-retrieve-an-asset-report</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.AssetReport.AssetReportClient.RefreshReport(Take5ive.Plaid.AssetReport.RefreshReportRequest)">
+            <summary>
+            Refresh snapshots of an Item or set of Items, including account balances,
+            historical transactions, and account holder identity information.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Asset report tokens.</returns>
+            <remarks>https://plaid.com/docs/#refreshing-an-asset-report</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.AssetReport.AssetReportClient.RemoveAuditCopy(Take5ive.Plaid.AssetReport.RemoveAuditCopyRequest)">
+            <summary>
+            Remove an Audit Copy of an Asset Report
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Boolean value indicating successful removal.</returns>
+            <remarks>https://plaid.com/docs/#remove-asset-reports-and-audit-copies</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.AssetReport.AssetReportClient.RemoveReport(Take5ive.Plaid.AssetReport.RemoveReportRequest)">
+            <summary>
+            Remove an Asset Report.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Boolean value indicating successful removal.</returns>
+            <remarks>https://plaid.com/docs/#remove-asset-reports-and-audit-copies</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Auth.AuthClient.GetAuth(Take5ive.Plaid.Auth.GetAuthRequest)">
+            <summary>
+            Get "item" details from the Plaid API for a specified Access Token
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>All accounts for the specified access token.</returns>
+            <remarks>
+            https://plaid.com/docs/#auth
+            </remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Categories.CategoriesClient.GetCategories">
+            <summary>
+            Get a list of transaction categories from Plaid.
+            </summary>
+            <returns>List of transaction categories.</returns>
+            <remarks>https://plaid.com/docs/#category-overview</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Core.SendRequest``1(Take5ive.Plaid.PlaidRequest,System.Net.Http.HttpClient,Take5ive.Plaid.PlaidConfig)">
+            <summary>
+            Sends reqeusts to Plaid API
+            </summary>
+            <param name="request">Request to send to Plaid's API.</param>
+            <param name="httpClient">HttpClient to use for this request.</param>
+            <param name="plaidConfig">Plaid client configuration data.</param>
+            <returns>Plaid response data</returns>
+        </member>
+        <member name="M:Take5ive.Plaid.Identity.IdentityClient.GetIdentity(System.String)">
+            <summary>
+            Retrieve various account holder information on file with the financial institution, including names, emails, phone numbers, and addresses.
+            </summary>
+            <param name="accessToken">Access token of the item to get the identity for.</param>
+            <returns>Identity information.</returns>
+            <remarks>https://plaid.com/docs/#identity</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Income.IncomeClient.GetIncome(System.String)">
+            <summary>
+            Retrieve information pertaining to a Item’s income.
+            </summary>
+            <param name="accessToken"></param>
+            <returns>Detailed income information</returns>
+            <remarks>https://plaid.com/docs/#income</remarks>
+        </member>
+        <member name="T:Take5ive.Plaid.Institutions.InstitutionsClient">
+            <summary>
+            Handles all of the institution related requests to the Plaid API.
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.Institutions.InstitutionsClient.GetInstitutions(Take5ive.Plaid.Institutions.GetInstitutionsRequest)">
+            <summary>
+            Get a list of institutions from the Plaid API
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>List of requested institutions</returns>
+            <remarks>
+            https://plaid.com/docs/#all-institutions
+            To get all institutions, you will have to call this function more than once while utilizing the offset param.
+            </remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Institutions.InstitutionsClient.GetInstitutionById(Take5ive.Plaid.Institutions.GetInstitutionByIdRequest)">
+            <summary>
+            Get a specific institution from the Plaid API
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Institution information</returns>
+            <remarks>https://plaid.com/docs/#institutions-by-id</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Institutions.InstitutionsClient.SearchInstitutions(Take5ive.Plaid.Institutions.SearchInstitutionsRequest)">
+            <summary>
+            Get institutions from the Plaid API based on a "like" query
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>List of institutions matching the query.</returns>
+            <remarks>https://plaid.com/docs/#institution-search</remarks>
+        </member>
+        <member name="T:Take5ive.Plaid.Investments.InvestmentsClient">
+            <summary>
+            Handles all of the Investments related requests to the Plaid API.
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.Investments.InvestmentsClient.GetHoldings(Take5ive.Plaid.Investments.GetHoldingsRequest)">
+            <summary>
+            Retrieve user-authorized Holding, Security, and Investment Transactions data for a wide array of investment account and security types.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Investment data.</returns>
+            <remarks>https://plaid.com/docs/#retrieve-holdings-request</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Investments.InvestmentsClient.GetTransactions(Take5ive.Plaid.Investments.GetTransactionsRequest)">
+            <summary>
+            Retrieve user-authorized transaction data for investment accounts.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Transaction details.</returns>
+            <remarks>https://plaid.com/docs/#retrieve-investment-transactions-request</remarks>
+        </member>
+        <member name="T:Take5ive.Plaid.Item.ItemClient">
+            <summary>
+            Handles all of the Item related requests to the Plaid API.
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.Item.ItemClient.ExchangePublicToken(Take5ive.Plaid.Item.ExchangePublicTokenRequest)">
+            <summary>
+            Exchange public_token received from Plaid Link for the private access_token.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Private access token and item id.</returns>
+            <remarks>https://plaid.com/docs/#exchange-token-flow</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Item.ItemClient.GetPublicToken(System.String)">
+            <summary>
+            Get a public token that can be used in place of an access token with Plaid Link.
+            </summary>
+            <param name="accessToken">Access token to get the public token for.</param>
+            <returns>Public token that can be used with Plaid Link.</returns>
+            <remarks>https://plaid.com/docs/#creating-public-tokens</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Item.ItemClient.UpdateWebhook(Take5ive.Plaid.Item.UpdateWebhookRequest)">
+            <summary>
+            Update the webhook URL for a Plaid Item.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Updated item information.</returns>
+            <remarks>https://plaid.com/docs/#update-webhook</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Item.ItemClient.GetItem(System.String)">
+            <summary>
+            Get an "item" from Plaid.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Plaid "item".</returns>
+            <remarks>https://plaid.com/docs/#retrieve-item</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Item.ItemClient.RotateAccessToken(System.String)">
+            <summary>
+            Rotate/Invalidate an existing access token.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Updated/New access token.</returns>
+            <remarks>https://plaid.com/docs/#rotate-access-token</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Item.ItemClient.RemoveItem(System.String)">
+            <summary>
+            Delete/Remove an "item" from Plaid.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Boolean value indicating success.</returns>
+            <remarks>https://plaid.com/docs/#remove-an-item</remarks>
+        </member>
+        <member name="T:Take5ive.Plaid.Liabilities.LiabilitiesClient">
+            <summary>
+            Handles all of the Liability related requests to the Plaid API.
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.Liabilities.LiabilitiesClient.GetLiabilities(Take5ive.Plaid.Liabilities.GetLiabilitiesRequest)">
+            <summary>
+            Retrieve various details about an Item with loan or credit accounts.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Liability details.</returns>
+            <remarks>https://plaid.com/docs/#retrieve-liabilities-request</remarks>
+        </member>
+        <member name="T:Take5ive.Plaid.Link.LinkClient">
+            <summary>
+            Handles all of the Link related requests to the Plaid API.
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.Link.LinkClient.GetLinkToken(Take5ive.Plaid.Link.GetLinkTokenRequest)">
+            <summary>
+            In order to initialize Link, you will need to create a link_token. A link_token can be
+            configured for different Link flows depending on the fields provided during token creation.
+            It is ephemeral and has a short lived expiration.
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>Response object containing the link token.</returns>
+            <remarks>https://plaid.com/docs/#create-link-token</remarks>
+        </member>
+        <member name="T:Take5ive.Plaid.PlaidRequest">
+            <summary>
+            Base class for all requests to the API
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.PlaidRequest.#ctor">
+            <summary>
+            Constructor for base class
+            </summary>
+        </member>
+        <member name="M:Take5ive.Plaid.PlaidRequest.Serialize(System.Boolean)">
+            <summary>
+            Serialize this object to JSON.
+            </summary>
+            <param name="ignoreNullValues">Do you want to ignore null values when creating the JSON?</param>
+            <returns>JSON String</returns>
+        </member>
+        <member name="M:Take5ive.Plaid.Transactions.TransactionsClient.GetTransactions(Take5ive.Plaid.Transactions.GetTransactionsRequest)">
+            <summary>
+            Get account transactions from Plaid
+            </summary>
+            <param name="request">Request object containing desired Plaid parameters.</param>
+            <returns>List of account transactions.</returns>
+            <remarks>https://plaid.com/docs/#transactions</remarks>
+        </member>
+        <member name="M:Take5ive.Plaid.Transactions.TransactionsClient.RefreshTransactions(System.String)">
+            <summary>
+            Initiates an on-demand extraction to fetch the newest transactions for an item.
+            </summary>
+            <param name="accessToken">Access token for the item to refresh transactions for.</param>
+            <returns>Successful request returns HttpStatusCode 200.</returns>
+            <remarks>https://plaid.com/docs/#transactions-refresh</remarks>
+        </member>
+    </members>
+</doc>
